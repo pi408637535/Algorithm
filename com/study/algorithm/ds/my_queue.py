@@ -53,7 +53,7 @@ class CirculationQueue(object):
 
 if __name__ == '__main__':
     cq = CirculationQueue(13)
-    year = 5
+    year = 42
     total_money = 0
     month_money = 1000
     rate = 0.0471
