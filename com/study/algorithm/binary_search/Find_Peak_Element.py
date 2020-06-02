@@ -1,3 +1,9 @@
+
+'''
+因为是仅返回一个Peak Element就行.
+所以，仅需要在不断上升的波浪，挑选最可能找到那段就行。
+'''
+
 class Solution(object):
     def findPeakElement(self, nums):
         """
