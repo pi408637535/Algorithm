@@ -22,3 +22,13 @@ while(start + 1 < end) #邻近or相等跳出循环
     Recover Rotated Sorted Array
     Rotate String  
     Reverse Words in a String
+ 
+#递归算法
+递归三要素：
+    1.明确递归程序作用：接受什么返回什么 
+    2.数据规模减低:处理方法同第一步，数据规模降低
+    3.明确终止条件
+#递归：
+    数据结构递归：树；算法递归
+#Recursion 获取所以叶子节点和
+概念:树的高度是针对总体而言，树的深度是针对每个节点而言
