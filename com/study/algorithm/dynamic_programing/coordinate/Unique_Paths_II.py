@@ -16,17 +16,17 @@ class Solution(object):
 
         f = [[0 for i in range(len(obstacleGrid[0]))] for j in range(len(obstacleGrid))]
 
-
+        #init & condition
         for i in range(len(obstacleGrid)):
             f[i][0] = 1
-            if obstacleGrid[i][0] == 1:
+            if obstacleGrid[i][0] == 1: #行阻塞
                 f[i][0] = 0
                 break
 
 
         for j in range(len(obstacleGrid[0])):
             f[0][j] = 1
-            if obstacleGrid[0][j] == 1:
+            if obstacleGrid[0][j] == 1: #行阻塞
                 f[0][j] = 0
                 break
 
