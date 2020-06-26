@@ -38,4 +38,4 @@ while(start + 1 < end) #邻近or相等跳出循环
 
 Traverse vs Divide Conquer
 they are both Recursion algorithm
-result in  global parameter Vs Result in return value
+result in  global parameter Vs Result in return value(能每经过一次，new 一次)
