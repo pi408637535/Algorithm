@@ -22,6 +22,8 @@ class Solution(object):
 
         f = [ [0 for j in range(2)] for i in range(n + 1) ]
 
+        #时间复杂度 N * 2
+
         for i in range(n+1):
             if i == 0: continue
 
