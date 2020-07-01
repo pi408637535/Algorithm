@@ -1,3 +1,6 @@
+import numpy as np
+
+#https://www.jianshu.com/p/f379b372cd53
 class Solution(object):
     def lengthOfLIS(self, nums):
         """
@@ -59,13 +62,9 @@ class Solution3(object):
 
         for i in range(len(nums)):
             if i == 0: continue
-
-            if nums[i] > nums[i - 1]:
-                for j in range(i):
-
-
-
-                    f[i] = max([ f[j-1] + 1, f[i] ])
+            for j in range(i):
+                if nums[i] > nums[j]:
+                    f[i] = max([ 1, f[j] + 1, f[i] ])
 
 
         return max(f)
@@ -73,4 +72,4 @@ class Solution3(object):
 if __name__ == '__main__':
     input =  [10,9,2,5,3,7,101,18]
     #input = [4,10,4,3,8,9]
-    print( Solution().lengthOfLIS(input) )
+    print( Solution3().lengthOfLIS(input) )
