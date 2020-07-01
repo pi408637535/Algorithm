@@ -63,6 +63,81 @@ class Solution2(object):
         return f[now][len(grid[0]) - 1]
 
 
+class Solution3(object):
+    def minPathSum(self, grid):
+        n = len(grid)
+        m = len(grid[0])
+
+        f = [ [ 0 for j in range(m)] for i in range(n) ]
+        f[0][0] = grid[0][0]
+
+        for i in range(n):
+            if i == 0: continue
+            f[i][0] = grid[i][0] + f[i-1][0]
+        for j in range(m):
+            if j == 0: continue
+            f[0][j] = f[0][j-1] + grid[0][j]
+
+        for i in range(n):
+            if i == 0: continue
+            for j in range(m):
+                if j == 0: continue
+
+                f[i][j] = min([ f[i-1][j], f[i][j-1] ]) + grid[i][j]
+
+        return f[n-1][m-1]
+
+class Solution4(object):
+    def minPathSum(self, grid):
+        n = len(grid)
+        m = len(grid[0])
+
+        f = [ [ 0 for j in range(m)] for i in range(n) ]
+        pi = [[-1 for j in range(m)] for i in range(n)]
+        f[0][0] = grid[0][0]
+
+        for i in range(n):
+            if i == 0: continue
+            f[i][0] = grid[i][0] + f[i-1][0]
+            pi[i][0] = 0
+
+        for j in range(m):
+            if j == 0: continue
+            f[0][j] = f[0][j-1] + grid[0][j]
+            pi[0][j] = 1
+
+        for i in range(n):
+            if i == 0: continue
+            for j in range(m):
+                if j == 0: continue
+
+                if f[i-1][j] < f[i][j-1]:
+                    pi[i][j] = 0
+                else:
+                    pi[i][j] = 1
+
+                f[i][j] = min([ f[i-1][j], f[i][j-1] ]) + grid[i][j]
+
+        length = m + n - 1
+        path = []
+        i = n - 1
+        j = m - 1
+
+        path.append(grid[i][j])
+        for k in range(length):
+            if k == 0: continue
+
+            if pi[i][j] == 1:
+                j -= 1
+            else:
+                i -= 1
+            path.append(grid[i][j])
+
+        print(path[::-1])
+
+        return f[n-1][m-1]
+
+
 if __name__ == '__main__':
     data = [
   [1,3,1],
@@ -70,5 +145,5 @@ if __name__ == '__main__':
   [4,2,1]
     ]
 
-    print( Solution2().minPathSum(data) )
+    print( Solution4().minPathSum(data) )
     
