@@ -275,5 +275,5 @@ if __name__ == '__main__':
   [4,2,1]
     ]
 
-    print( Solution6().minPathSum(data) )
+    print( Solution4().minPathSum(data) )
     
