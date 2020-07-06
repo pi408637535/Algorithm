@@ -69,7 +69,7 @@ class Solution(object):
         elif matrix[int(end / column)][int(end % column)] == target:
             return True
         else:
-            return True
+            return False
 
 
 if __name__ == '__main__':
@@ -81,5 +81,5 @@ if __name__ == '__main__':
         [10, 11, 16, 20],
         [23, 30, 34, 50]
     ]
-    target = 13
-    print( Solution().searchMatrix1(matrix, target) )
+    target = 15
+    print( Solution().searchMatrix(matrix, target) )
