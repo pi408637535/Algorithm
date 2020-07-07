@@ -1,43 +1,28 @@
+import numpy as np
+
 class Solution(object):
 
-    def binary_serarch(self, matrix, target):
-
-        start = 0
-        end = len(matrix) -1
-        while start + 1 < end:
-            mid = int((start + end) / 2)
-            if matrix[mid] == target:
-                return True
-            elif matrix[mid] > target:
-                end = mid
-            else:
-                start = mid
-
-        if matrix[start] == target:
-            return True
-        elif matrix[end] == target:
-            return True
-        else:
-            return False
-
-
     def searchMatrix(self, matrix, target):
-        """
-        :type matrix: List[List[int]]
-        :type target: int
-        :rtype: bool
-        """
-        if len(matrix) == 0 or len(matrix[0]) == 0:
-            return False
+        flag = False
+
+        if len(matrix) == 0 or len(matrix[0])  == 0:
+            return flag
 
         m = len(matrix) - 1
-        n = len(matrix[0]) -1
+        n = len(matrix[0]) - 1
 
-        for i in range(m):
-            if matrix[i][n] <= target:
-                break
-        return self.binary_serarch(matrix[i], target)
-        #两种情况 i到头了
+        i = m
+        j = 0
+        while i >= 0 and j <= n:
+            if target == matrix[i][j]:
+                return True
+            elif target < matrix[i][j]:
+                i -= 1
+            else:
+                j += 1
+
+        return False
+
 
 
 

@@ -47,7 +47,7 @@ class Solution(object):
         """
         flag = False
 
-        if len(matrix) == 0 or len(matrix[0]) == 0 == 0:
+        if len(matrix) == 0 or len(matrix[0]) == 0:
             return flag
 
         start = 0
