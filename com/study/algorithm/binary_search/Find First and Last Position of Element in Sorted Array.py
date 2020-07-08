@@ -30,10 +30,11 @@ class Solution(object):
     def searchRange(self, nums, target):
 
         if len(nums) == 0:
-            return -1
+            return [-1,-1]
 
         start = 0
         end = len(nums) - 1
+        result = []
 
         while start + 1 < end:
             mid = int((start + end) / 2)
@@ -43,6 +44,37 @@ class Solution(object):
                 end = mid
             else:
                 start = mid
+
+        if nums[start] == target:
+            result.append(start)
+        elif nums[end] == target:
+            result.append(end)
+        else:
+            result.append(-1)
+
+        start = 0
+        end = len(nums) - 1
+
+
+        while start + 1 < end:
+            mid = int((start + end) / 2)
+            if nums[mid] == target:
+                start = mid
+            elif nums[mid] > target:
+                end = mid
+            else:
+                start = mid
+
+        if nums[end] == target:
+            result.append(end)
+        elif nums[start] == target:
+            result.append(start)
+        else:
+            result.append(-1)
+
+        return result
+
+
 
 
     def searchRange1(self, nums, target):
@@ -109,8 +141,10 @@ if __name__ == '__main__':
 
     nums = [1,2,3]
     target = 2
-    nums = [5,7,7,8,8,10]
-    target = 8
+    #nums = [5,7,7,8,8,10]
+    #target = 8
     #nums = [1, 1, 2]
     #target = 1
+    #nums = [2,2]
+    #target = 2
     print( Solution().searchRange(nums, target) )
