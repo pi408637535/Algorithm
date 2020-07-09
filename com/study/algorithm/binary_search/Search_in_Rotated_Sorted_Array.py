@@ -5,6 +5,7 @@
 # @Software: PyCharm
 
 #两个问题：1.是否是正常段 2.target是否在里面
+#https://www.jianshu.com/p/874e1d6a3156
 
 class Solution(object):
     def search(self, nums, target):
