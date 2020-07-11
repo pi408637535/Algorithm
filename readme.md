@@ -19,6 +19,12 @@ while(start + 1 < end) #邻近or相等跳出循环
 Search a 2D Matrix II   
 first bad version
 Find Peak Search
+Search a 2D Matrix II   finish
+first bad version       finish
+Find Peak Search        finish
+
+Search in Rotated Sorted Array
+
    
 去一半无解的区域或者向一半有解的区域
 #翻转算法
