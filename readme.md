@@ -51,7 +51,13 @@ they are both Recursion algorithm
 result in  global parameter Vs Result in return value(能每经过一次，new 一次)
 
 
+递归是从 head->tail
+divide-conquer tail->head
+
 dp：
 1.rolling array
 2.how wo print path
+
+
+7.5-7.12 未完成任务
 
