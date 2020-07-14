@@ -25,6 +25,36 @@ class Solution(object):
         return max( [ left_max, right_max, \
                       (left_max + right_max + root.val), left_max + root.val, right_max + root.val ] )
 
+class ResultType(object):
+    def __init__(self, root2any, any2any):
+        self.root2any = root2any
+        self.any2any = any2any
+
+class Solution(object):
+
+    def helper(self, root):
+        if root == None:
+            return ResultType(-sys.maxsize, -sys.maxsize)
+
+        left = self.helper(root.left)
+        right = self.helper(root.right)
+
+        root2any = max([root.val, left.root2any + root.val, right.root2any + root.val])
+
+        any2any = max([left.any2any, right.any2any])
+        any2any = max([any2any, max([left.root2any, 0]) + max([0, right.root2any]) + root.val])
+
+        return ResultType(root2any, any2any)
+
+
+    def maxPathSum(self, root):
+        """
+        :type root: TreeNode
+        :rtype: int
+        """
+        result = self.helper(root)
+        return max(result.root2any, result.any2any)
+
 
 
 if __name__ == '__main__':
@@ -39,4 +69,18 @@ if __name__ == '__main__':
     TreeNode20.left = TreeNode15
     TreeNode20.right = TreeNode7
 
-    print( Solution().maxPathSum(TreeNode_10) )
+    TreeNode1 = TreeNode(1)
+    TreeNode_2_1 = TreeNode(-2)
+    TreeNode_3 = TreeNode(-3)
+    TreeNode1C1 = TreeNode(1)
+    TreeNode3 = TreeNode(3)
+    TreeNode_2_2 = TreeNode(-2)
+    TreeNode_1 = TreeNode(-1)
+    TreeNode1.left = TreeNode_2_1
+    TreeNode1.right = TreeNode_3
+    TreeNode_2_1.left = TreeNode1C1
+    TreeNode_2_1.right = TreeNode3
+    TreeNode_3.left = TreeNode_2_2
+    TreeNode1C1.left = TreeNode_1
+
+    print( Solution().maxPathSum(TreeNode1) )
