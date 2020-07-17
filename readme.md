@@ -63,8 +63,9 @@ dp：
 7.13 2
 7.14 3
 7.15 3
-7.16 1
-
+7.16 4
+7.17 
+Word Break 有问题？动态并不好使
 
 Binary Search Tree Iterator 
 In order Successor in binary Search Tree
