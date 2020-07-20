@@ -54,40 +54,87 @@ class Solution(object):
         :type n: int
         :rtype: ListNode
         """
-        dummy = ListNode()
-        dummy.next = head
 
         if head == None:
             return None
 
-        pre = dummy  # 寻找开始点之前的结点
-        cur = head  # 寻找结束点
+        dummy = ListNode()
+        dummy.next = head
+
+        cur = dummy  # 寻找开始点之前的结点
 
         i = 1
         while i < m:
-            if head != None:
-                head = head.next
-                i += 1
+            if cur == None:
+                return None
+            cur = cur.next
+            i += 1
 
-        pre = head #m-1
-        cur = head.next
+
+        pre = cur
+        mNode = cur.next
 
         #reverse m -> n
-        nNode = head.next
-        postnNode = nNode.next
+        nNode = mNode
+        postNode = mNode.next
 
-        while i <= m and i <= n:
-            if postnNode == None:
-                break
+        i = m
+        while i < n:
+            if postNode == None:
+                return None
+            temp = postNode.next
+            postNode.next = nNode
+            nNode = postNode
+            postNode = temp
+            i += 1
 
-            temp = postnNode.next
-            postnNode.next = nNode
-            nNode = postnNode
-            postnNode = temp
-
-        nNode.next = postnNode
+        #connect m-1->n, m->n+1
+        mNode.next = postNode
         pre.next = nNode
 
+
+
+        return dummy.next
+
+
+class Solution(object):
+    def reverseBetween(self, head, m, n):
+
+        if head == None:
+            return None
+
+        dummy = ListNode()
+        dummy.next = head
+
+        pre = dummy
+        #i<m
+        i = 1
+        while i < m:
+            if pre == None:
+                return None
+            pre = pre.next
+            i += 1
+
+        # m <= i < n
+
+        cur = pre.next
+        mNode = cur
+        postNode = cur.next
+
+        i = m
+        while i < n:
+            if postNode == None:
+                return None
+
+            temp = postNode.next
+            postNode.next = cur
+            cur = postNode
+            postNode = temp
+            i += 1
+
+        # connect m, n+1
+        mNode.next = postNode
+        pre.next = cur
 
         return dummy.next
 
