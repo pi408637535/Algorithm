@@ -75,3 +75,5 @@ Binary Search Tree Iterator
 In order Successor in binary Search Tree
 Search Range in Binary Search Tree
 Remove Node in Binary Search Tree
+
+链表结构发生变化，就需要dummy node
