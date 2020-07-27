@@ -3,11 +3,7 @@ class ListNode(object):
         self.val = val
         self.next = next
 
-#priority queue
-#divide conquer
-#merge list two by two
 class Solution(object):
-
     def mergeTwoLists(self, l1, l2):
         """
         :type l1: ListNode
@@ -33,28 +29,6 @@ class Solution(object):
         return dummy.next
 
 
-    def mergeHelper(self, lists, start, end):
-        if start == end:
-            return lists[start]
-
-        mid = int( ( start + end ) / 2)
-        left = self.mergeHelper(lists, start, mid)
-        right = self.mergeHelper(lists, mid + 1, end)
-        return self.mergeTwoLists(left, right)
-
-
-    def mergeKLists(self, lists):
-        """
-        :type lists: List[ListNode]
-        :rtype: ListNode
-        """
-
-        if len(lists) == 0:
-            return None
-        result = self.mergeHelper(lists, 0, len(lists)-1)
-
-        return result
-
 
 if __name__ == '__main__':
     ListNode1 = ListNode(1)
@@ -70,6 +44,4 @@ if __name__ == '__main__':
     ListNode1_1.next = ListNode3
     ListNode3.next = ListNode4
 
-    lists = [ListNode1,ListNode1_1 ]
-
-    print(Solution().mergeKLists(lists))
+    print(Solution().mergeTwoLists(ListNode1, ListNode1_1))
