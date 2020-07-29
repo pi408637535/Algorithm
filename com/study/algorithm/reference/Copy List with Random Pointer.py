@@ -4,44 +4,39 @@ class Node:
         self.next = next
         self.random = random
 
+
+
 class Solution(object):
     def copyRandomList(self, head):
-        """
-        :type head: Node
-        :rtype: Node
-        """
-        hashmap = {}
-        dummy = Node(0)
-        dummy.next = head
-
         if head == None:
             return head
 
-        pre = dummy
+        dummy = Node(0)
+        cur = dummy
+        dummy.next = cur
+        data = {}
+
 
         while head != None:
-            if hashmap.get(head, None) != None:
-                new_node = hashmap[head]
-            else:
-                new_node = Node(head.val)
-                hashmap[head] = new_node
+            if data.get(head, None) == None:
+                data[head] = Node(head.val)
 
-            pre.next = new_node
+            cur.next = data[head] #new node
+
+
 
             if head.random != None:
-                if hashmap.get(head.random, None) != None:
-                    new_node.random = hashmap.get(head.random)
-                else:
-                    new_node.random = Node(head.random.val)
-                    hashmap[head.random] = new_node.random
+                if data.get(head.random, None) == None:
+                    data[head.random] = Node(head.random.val)
 
-            pre = new_node
+                cur.next.random = data[head.random]
+
+            cur = cur.next
             head = head.next
 
-
-
-
         return dummy.next
+
+
 
 if __name__ == '__main__':
     Node3_1 = Node(3)
