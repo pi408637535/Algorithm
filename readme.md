@@ -78,6 +78,9 @@ dp：
 7.30
 7.31
 8.1 1
+8.2
+8.3
+
 Word Break 有问题？动态并不好使
 
 Binary Search Tree Iterator 
@@ -86,3 +89,14 @@ Search Range in Binary Search Tree
 Remove Node in Binary Search Tree
 
 链表结构发生变化，就需要dummy node
+hard
+Median of Two Sorted Arrays 
+Largest Rectangle in Histogram    A08 a
+Maximal Rectangle                 A08 a
+
+heap用途
+merge k sorted list 
+merge k sorted arrays
+data stream median
+top k largest numbers
+kth smallest number in sorted matrix
