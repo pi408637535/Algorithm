@@ -12,12 +12,20 @@ class Node(object):
         self.left = left
         self.right = right
 
+#BTS中序遍历是个上升序列
+#题目要求：转换成一个排序的循环双向链表。所以要中序遍历
+#遍历时 right指代 next,left指代pre
+
 class Solution(object):
-    def treeToDoublyList(self, root):
+    def treeToDoublyList(self, cur):
         """
         :type root: Node
         :rtype: Node
         """
+
+        if cur == None:
+            return None
+
         self.pre = None
         self.head = None
 
@@ -26,15 +34,19 @@ class Solution(object):
             dfs(cur.left)
 
             if self.pre:
-                self.pre
+                self.pre.right = cur
+                cur.left = self.pre
 
             else:
                 self.head = cur
 
             self.pre = cur
-            dfs(root.right)
+            dfs(cur.right)
 
-        dfs(root)
+        dfs(cur)
+
+        self.head.left = self.pre
+        self.pre.right = self.head
 
         return self.head
 
