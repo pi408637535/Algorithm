@@ -4,7 +4,7 @@
 # @FileName: combination.py
 # @Software: PyCharm
 
-nums = [1,2,3]
+nums = [2,3,4]
 ans = []
 
 def dfs(n, s, cur):
