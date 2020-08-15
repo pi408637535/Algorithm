@@ -24,9 +24,29 @@ class Solution(object):
         return positive or negative
 
 
+class Solution(object):
+    def isStraight(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: bool
+        """
+        nums.sort()
+        joker = 0
+        for i in range(4):
+            if nums[i] == 0:
+                joker += 1
+                continue
+            if nums[i] == nums[i+1]:
+                return False
+
+
+
+        return True if nums[-1] - nums[joker] < 5 else False
+
 if __name__ == '__main__':
     nums = [1,2,3,4,5]
     nums = [0,0,8,5,4]
-    nums = [1,2,12,0,3]
+    #nums = [1,2,12,0,3]
+    nums = [13,13,9,12,10]
 
     print( Solution().isStraight(nums) )

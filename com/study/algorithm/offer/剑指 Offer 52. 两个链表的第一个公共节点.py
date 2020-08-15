@@ -9,38 +9,47 @@ class Solution(object):
         :type head1, head1: ListNode
         :rtype: ListNode
         """
+        list_one_length = 0
         dummyA = ListNode(0)
-        pre = dummyA.next
+        dummyA.next = headA
+
         while headA != None:
-            temp = headA.next
-            dummyA.next = headA
-            headA.next = pre
-
-            pre = headA
-            headA = temp
-
-        dummyB = ListNode(0)
-        pre = dummyB.next
-        while dummyB != None:
-            temp = headB.next
-            dummyB.next = headB
-            headB.next = pre
-
-            pre = headB
-            headB = temp
-
-        headA = dummyA.next
-        headB = dummyB.next
-
-        pre = None
-        while headA.val == headB.val:
-            pre = headA
-
+            list_one_length += 1
             headA = headA.next
+
+
+
+        list_two_length = 0
+        dummyB = ListNode(0)
+        dummyB.next = headB
+
+        while dummyB != None:
+            list_two_length += 1
             headB = headB.next
 
-        return pre
+        num = list_one_length - list_two_length
+        if num > 0:
+            fast_node = dummyA.next
+            while num > 0:
+                fast_node = fast_node.next
+                num -= 1
+            slow_node = dummyB.next
+        else:
+            fast_node = dummyB.next
+            while num < 0:
+                fast_node = fast_node.next
+                num += 1
+            slow_node = dummyA.next
 
+        while fast_node != None and slow_node != None:
+            if fast_node == slow_node:
+                return fast_node
+            fast_node = fast_node.next
+            slow_node = slow_node.next
+
+        return None
 
 
 if __name__ == '__main__':
+    pass
+

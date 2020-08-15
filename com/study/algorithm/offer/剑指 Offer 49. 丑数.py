@@ -5,6 +5,7 @@
 # @Software: PyCharm
 
 import heapq
+import collections
 class Solution(object):
     def nthUglyNumber(self, n):
         """
@@ -13,28 +14,31 @@ class Solution(object):
         """
         visit = {}
         heap = []
-        heapq.heappush(heap, 1)
-        heapq.heappush(heap, 2)
-        heapq.heappush(heap, 3)
-        heapq.heappush(heap, 5)
 
-        ans = []
-        ans.append(1)
-        
-        for i in range(n):
+        if n == 1:
+            return 1
+
+        #queue = collections.deque([1,2,3,5])
+        basic = [2,3,5]
+        for ele in basic:
+            heapq.heappush(heap, ele)
+            visit[ele] = True
+
+
+        for i in range(1,n):
             top = heapq.heappop(heap)
 
-            for j in range(len(heap)):
-                num = top * heap[j]
+            for j in range(3):
+                num = top * basic[j]
                 if not visit.get(num, False):
                     visit[num] = True
-                    ans.append(num)
+                    #queue.append(num)
                     heapq.heappush(heap, num)
-
-        return ans[n]
+            #top = heapq.heappop(heap)
+        return top
 
 
 
 if __name__ == '__main__':
-    n = 12
+    n = 2
     print( Solution().nthUglyNumber(n) )
