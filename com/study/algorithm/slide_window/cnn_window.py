@@ -5,14 +5,18 @@
 # @Software: PyCharm
 
 ans = []
+import numpy as np
 
-
+#https://www.ituring.com.cn/article/468202
 def window_fun(nums, window):
     n = len(nums)
     window_size = len(window)
 
+    window = np.array(window)
     for i in range(0, n - window_size + 1):
-        ans.append(nums[i:window_size + i])
+        data1 = nums[i:window_size + i]
+        data = np.sum(window * data1)
+        ans.append(nums[data])
 
 
 if __name__ == '__main__':
