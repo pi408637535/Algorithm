@@ -1,3 +1,13 @@
+# -*- coding: utf-8 -*-
+# @Time    : 2020/8/25 13:25
+# @Author  : piguanghua
+# @FileName: Linked List Cycle II.py
+# @Software: PyCharm
+
+# a + b 为总链表数量
+# f = 2s , f = s + nb 相遇时情况
+
+
 class ListNode(object):
     def __init__(self, val=0, next=None):
         self.val = val
@@ -5,28 +15,11 @@ class ListNode(object):
 
 
 class Solution(object):
-    def hasCycle(self, head):
-        if not head or not head.next:
-            return False
-
-        slow = head
-        fast = head.next.next
-
-        while fast != None:
-            if not fast or not fast.next:
-                return False
-
-            if fast.val == slow.val:
-                return True
-
-            fast = fast.next.next
-            slow = slow.next
-
-        return False
-
-
-class Solution(object):
-    def hasCycle(self, head):
+    def detectCycle(self, head):
+        """
+        :type head: ListNode
+        :rtype: ListNode
+        """
         if not head or not head.next:
             return False
 
@@ -37,11 +30,22 @@ class Solution(object):
             if not fast or not fast.next:
                 return False
 
-            if fast.val == slow.val:
-                return True
-
             fast = fast.next.next
             slow = slow.next
+
+            if slow == fast:
+                break
+
+
+
+
+        #loop
+        fast = head
+        while slow != fast:
+            slow = slow.next
+            fast = fast.next
+
+        return slow.val
 
 
 
@@ -57,7 +61,7 @@ if __name__ == '__main__':
 
     ListNode4.next = ListNode2
 
-    print( Solution().hasCycle(ListNode3) )
+    print(Solution().detectCycle(ListNode3))
 
 
 
