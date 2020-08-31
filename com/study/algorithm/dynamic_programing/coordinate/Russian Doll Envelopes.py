@@ -25,5 +25,5 @@ class Solution(object):
     
         
 if __name__ == '__main__':
-    input = [[5,4],[6,4],[6,7],[2,3]]
+    input = [[1,2],[2,3],[3,4],[1,2]]
     print( Solution().maxEnvelopes(input) )

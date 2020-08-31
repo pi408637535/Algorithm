@@ -26,6 +26,6 @@ def swab(nums, i, j):
 
 
 if __name__ == '__main__':
-    nums = [3,46,7,8,11,2,1]
+    nums = [4,1]
     quickSort(nums, 0, len(nums) - 1)
     print(nums)

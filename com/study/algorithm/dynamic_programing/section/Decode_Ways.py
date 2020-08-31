@@ -22,7 +22,7 @@ class Solution(object):
         one_char_list = [ str(i+1) for i in range(26)]
 
         f = [0 for i in range(len(s) + 1) ]
-        f[0] = 0
+        f[0] = 1
 
         for i in range(len(s) + 1):
             if i < 1: continue
@@ -40,8 +40,6 @@ class Solution(object):
 
 
 if __name__ == '__main__':
-    #data = "226"
-    #data = "12"   #2
-    data = "10" #1
-    #data = "00" #0
+    data = "226"
+
     print( Solution().numDecodings(data)  )

@@ -16,7 +16,7 @@ def window_fun(nums, window):
     for i in range(0, n - window_size + 1):
         data1 = nums[i:window_size + i]
         data = np.sum(window * data1)
-        ans.append(nums[data])
+        ans.append(data)
 
 
 if __name__ == '__main__':
