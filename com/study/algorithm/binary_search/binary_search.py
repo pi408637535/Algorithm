@@ -14,28 +14,23 @@ class Solution:
         end = len(nums) - 1
 
         while start + 1 < end: # 邻近or相等跳出循环
-            mid = int( ( start + end) / 2 )
+            #mid = int( ( start + end) / 2 )
+            mid = start + (end - start) // 2
             if nums[mid] == target:
-                return mid
+                start = mid
             elif nums[mid] > target:
                 end = mid
             else:
                 start = mid
 
-        if start + 1 == end:
-            if nums[start] == target:
-                return start
-            elif nums[end] == target:
-                return end
-            else:
-                return -1
-
-        elif nums[start] == target:
+        if nums[start] == target:
             return start
+        elif nums[end] == target:
+            return end
         else:
             return -1
 
 
-
 if __name__ == '__main__':
-    print(Solution().search([-1,0,3,5,9,12], 2))
+    nums, target = [1, 3, 5, 6], 7
+    print(Solution().search(nums, target))
