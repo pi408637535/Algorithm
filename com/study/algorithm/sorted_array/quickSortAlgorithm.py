@@ -46,7 +46,8 @@ def quickSort(arr, low, high):
         quickSort(arr, pi + 1, high)
 
 
-def quickSort()
+def quickSort():
+    pass
 
 
 arr = [10, 7, 8, 9, 1, 5]

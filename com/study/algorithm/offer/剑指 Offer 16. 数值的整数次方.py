@@ -11,15 +11,15 @@
 class Solution(object):
 
     def helper(self,x , n):
-        if  n == 0:
+        if n == 0:
             return 1
-        left_result = self.helper(x, int(n / 2))
-        right_result = self.helper(x, int(n / 2))
+        if n == 1:
+            return x
 
-        odd = 1
-        if int(n % 2) == 1:
-            odd = x
-        return left_result * right_result * odd
+
+        if n & 1:
+            return self.helper(x * x, n // 2) * x
+        return self.helper(x * x, n // 2)
 
     def myPow(self, x, n):
         """

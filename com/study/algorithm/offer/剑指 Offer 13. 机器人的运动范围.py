@@ -52,13 +52,66 @@ class Solution(object):
 
 
 
+class Solution(object):
+
+    def count_num(self, num):
+        res = []
+        while num:
+            res.append(num % 10)
+            num = num // 10
+
+        return sum(res)
+
+    def dfs(self, i, j, k):
+        if not 0 <= i < self.m or not 0 <= j < self.n or not self.count_num(i) + self.count_num(j) <= k:
+            return False
+        if self.used[i][j] == False:
+            self.used[i][j] = True
+            self.res += 1
+        else:
+            return
+
+        self.dfs(i + 1, j, k)
+        self.dfs(i - 1, j, k)
+        self.dfs(i, j + 1, k)
+        self.dfs(i, j - 1, k)
+
+        # if not self.used[i+1][j]:
+        #     self.dfs(i+1, j, k)
+        # if not self.used[i-1][j]:
+        #     self.dfs(i-1, j, k)
+        # if not self.used[i][j+1]:
+        #     self.dfs(i , j+1, k)
+        # if not self.used[i ][j-1]:
+        #     self.dfs(i , j-1, k)
+
+
+    def movingCount(self, m, n, k):
+        """
+        :type m: int
+        :type n: int
+        :type k: int
+        :rtype: int
+        """
+        self.m = m
+        self.n = n
+        self.used = [ [False] * n for i in range(m)]
+
+        self.res = 0
+
+        self.dfs(0, 0, k)
+
+
+        return self.res
+
+
 
 
 
 
 if __name__ == '__main__':
-    m = 3
-    n = 1
-    k = 0
+    m = 1
+    n = 2
+    k = 1
     print( Solution().movingCount(m, n, k) )
 
