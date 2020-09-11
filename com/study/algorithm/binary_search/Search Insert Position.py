@@ -6,32 +6,25 @@
 
 class Solution(object):
     def searchInsert(self, nums, target):
-        """
-        :type nums: List[int]
-        :type target: int
-        :rtype: int
-        """
+        s = 0
+        e = len(nums)-1
 
-        if len(nums) == 0:
-            return -1
-        start = 0
-        end = len(nums) - 1
-
-        while start+1 < end:
-            mid = int((start + end)/2)
-            if nums[mid] == target:
-                return mid
-            elif nums[mid] > target:
-                end = mid
+        while s + 1 < e:
+            mid = s + (e - s) // 2
+            if nums[mid] <= target:
+                s = mid
             else:
-                start = mid
+                e = mid
 
-        if nums[start] >= target:
+        if target < nums[s]:
             return 0
-        if nums[end] >= target:
-            return end
+        if target > nums[e]:
+            return len(nums)
         else:
-            return end+1
+            if nums[s] == target:
+                return s
+            else:
+                return s + 1
 
 
 
