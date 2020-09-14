@@ -10,21 +10,54 @@ class Solution(object):
         :type head: ListNode
         :rtype: ListNode
         """
-        dummy = ListNode()
+        dummy = ListNode(0)
         dummy.next = head
 
         pre = dummy
+        cur = head
 
-        while head != None:
-            if head.next != None and head.next.val == head.val:
-                val = head.val
-                while head != None and head.val == val:
-                    head = head.next
-                pre.next = head
+        while cur:
+
+            if cur.next and cur.val == cur.next.val:
+                while cur.next and cur.val == cur.next.val:
+                    cur = cur.next
+                pre.next = cur.next
+                cur = cur.next
+                #pre = pre.next
             else:
-                pre = head
-                head = head.next
 
+                pre = pre.next
+                cur = cur.next
+        pre.next = cur
+        return dummy.next
+
+
+class Solution(object):
+    def deleteDuplicates(self, head):
+        """
+        :type head: ListNode
+        :rtype: ListNode
+        """
+        dummy = ListNode(0)
+        dummy.next = head
+
+        pre = dummy
+        cur = head
+
+        while cur:
+
+            if cur.next and cur.val == cur.next.val:
+                val = cur.val
+                while cur and cur.val == val:
+                    cur = cur.next
+                pre.next = cur
+                # cur = cur.next
+                #pre = pre.next
+            else:
+
+                pre = pre.next
+                cur = cur.next
+        pre.next = cur
         return dummy.next
 
 

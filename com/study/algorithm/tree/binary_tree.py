@@ -49,6 +49,42 @@ def pre_order_by_stack(node):
         if data.left != None:
             stack.append(data.left)
 
+def preOrderByStack(node):
+    stack = []
+    ans = []
+    if node != None:
+        stack.append(node)
+
+    while stack:
+        node = stack.pop()
+        ans.append(node.value)
+        if node.right:
+            stack.append(node.right)
+
+        if node.left:
+            stack.append(node.left)
+
+    print(ans)
+
+
+def inOrderByStack(node):
+
+    stack = []
+    ans = []
+
+    while node or stack:
+
+        while node:
+            stack.append(node)
+            node = node.left
+
+        temp = stack.pop()
+        ans.append(temp.value)
+
+        node = temp.right
+
+    print(ans)
+
 
 
 if __name__ == '__main__':
@@ -72,10 +108,9 @@ if __name__ == '__main__':
     node6.left = node7
 
     recursive_pre(node1)
-    data = pre_order_divide_conquer(node1)
-    print(data)
-    pre_order_by_stack(node1)
 
+    preOrderByStack(node1)
+    inOrderByStack(node1)
 
 
 

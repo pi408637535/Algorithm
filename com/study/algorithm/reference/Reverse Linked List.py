@@ -63,6 +63,22 @@ class Solution(object):
         return pre.next
 
 
+class Solution(object):
+    def reverseList(self, head):
+        """
+        :type head: ListNode
+        :rtype: ListNode
+        """
+        dummy = ListNode(0)
+        pre = dummy
+        cur = head
+        while cur:
+            temp = cur.next
+            cur.next = pre.next
+            pre.next = cur
+            cur = temp
+        return dummy.next
+
 if __name__ == '__main__':
     ListNode1 = ListNode(1)
     ListNode2 = ListNode(2)

@@ -8,31 +8,75 @@ class TreeNode(object):
 
 import sys
 
+
 class Solution(object):
-    
+
+    def helper(self, root):
+
+        if not root:
+            return -sys.maxsize
+
+        left = max([self.helper(root.left), 0])
+        right = max([self.helper(root.right), 0])
+
+        self.max_size = max([root.val + left + right, self.max_size])
+
+        return max([root.val, root.val + right, root.val + left])
+
     def maxPathSum(self, root):
         """
         :type root: TreeNode
         :rtype: int
         """
-        max_num = -sys.maxsize
-        def helper(root):
-            if root == None:
-                return max_num
+        if not root:
+            return None
+        self.max_size = -sys.maxsize
 
-            left_num = helper(root.left)
-            right_num = helper(root.right)
+        self.helper(root)
 
-            
-            return max([left_num, right_num, root.val, root.val + left_num,
-                        root.val + right_num, root.val + left_num + right_num
-                        ])
+        return self.max_size
 
-        if root == None:
+
+class ResultType():
+    def __init__(self, root2any, any2any):
+        self.root2any = root2any
+        self.any2any = any2any
+
+
+import sys
+
+
+class Solution(object):
+
+    def helper(self, root):
+
+        if not root:
+            return ResultType(-sys.maxsize, -sys.maxsize)
+
+        left = self.helper(root.left)
+        right = self.helper(root.right)
+
+        root2any = max([root.val, root.val + max(0, left.root2any),
+                        root.val + max(0, right.root2any)])
+
+        any2any = max([root2any, root.val + max(0, left.root2any)
+                       + max(0, right.root2any),
+                       left.any2any,
+                       right.any2any])
+
+        return ResultType(root2any, any2any)
+
+    def maxPathSum(self, root):
+        """
+        :type root: TreeNode
+        :rtype: int
+        """
+        if not root:
             return 0
-        
-        return helper(root)
-        
+
+        result = self.helper(root)
+
+        return result.any2any
 
 if __name__ == '__main__':
     TreeNode1= TreeNode(1)
