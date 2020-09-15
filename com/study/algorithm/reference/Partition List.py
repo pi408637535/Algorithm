@@ -16,27 +16,27 @@ class Solution(object):
         :type x: int
         :rtype: ListNode
         """
-        left_dummy = ListNode()
-        right_dummy = ListNode()
+        dummy_a = ListNode(0) #lt
+        dummy_b = ListNode(0) #equal、gt
 
-        left_post = left_dummy
-        right_post = right_dummy
+        cur_a = dummy_a
+        cur_b = dummy_b
 
-        while head != None:
+        while head:
             if head.val < x:
-                left_post.next = head
-                left_post = head
+                cur_a.next = head
+                cur_a = cur_a.next
             else:
-                right_post.next = head
-                right_post = head
+                cur_b.next = head
+                cur_b = cur_b.next
 
             head = head.next
-        right_post.next = None # head跳出循环时，有可能不是在最后一个节点跳出的，所以需要注意
-        if left_dummy.next == None:
-            return right_dummy.next
-        else:
-            left_post.next = right_dummy.next
-            return left_dummy.next
+
+        cur_a.next = dummy_b.next
+        cur_b.next = None
+
+        return dummy_a.next
+
 
 
 
