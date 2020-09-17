@@ -1,3 +1,4 @@
+import heapq
 class Solution(object):
     def findKthLargest(self, nums, k):
         """
@@ -5,53 +6,16 @@ class Solution(object):
         :type k: int
         :rtype: int
         """
-
-
-        if len(nums) == 1:
-            return nums[0]
-
-
-
-        left = 0
-        right = len(nums) - 1
-        nums = self.quickSort(nums, left, right, right - k)
-
-        if nums[-k] == nums[-k+1]:
-            while nums[-k] == nums[-k+1]:
-                if k == 0:
-                    break
-                k -= 1
-
-        return nums[-k]
-
-
-
-
-    def quickSort(self, nums, left, right, k):
-
-        if left < right:
-            partition_index = self.partition(nums, left, right)
-            if partition_index > k:
-               self.quickSort(nums, left, partition_index - 1, k)
+        heap = []
+        for ele in nums:
+            if len(heap) < k:
+                heapq.heappush(heap, ele)
             else:
-                self.quickSort(nums, partition_index + 1, right, k)
-        return nums
+                heapq.heappush(heap, ele)
+                heapq.heappop(heap)
 
-    def partition(self, nums, left, right):
-        pivot = right
-        index = pivot - 1
-        i = index
-        while left <= i:
-            if nums[i] > nums[pivot]:
-                self.swap(nums, i, index)
-                index -= 1
-            i -= 1
+        return heapq.heappop(heap)
 
-        self.swap(nums, pivot, index + 1)
-        return index + 1
-
-    def swap(self, nums, i, j):
-        nums[i], nums[j] = nums[j], nums[i]
 
 
 if __name__ == '__main__':

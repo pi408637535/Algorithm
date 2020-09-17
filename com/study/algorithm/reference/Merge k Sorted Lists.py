@@ -8,39 +8,43 @@ class ListNode(object):
 #merge list two by two
 class Solution(object):
 
-    def mergeTwoLists(self, l1, l2):
-        """
-        :type l1: ListNode
-        :type l2: ListNode
-        :rtype: ListNode
-        """
-        dummy = head = ListNode()
+    def merge(self, left, right):
+        dummy = ListNode(0)
+        pre = dummy
 
-        while l1 != None and l2 != None:
-            if l1.val <= l2.val:
-                head.next = l1
-                l1 = l1.next
+        left = left[0]
+        right = right[0]
+
+        while left and right:
+            if left.val < right.val:
+                pre.next = left
+                left = left.next
             else:
-                head.next = l2
-                l2 = l2.next
-            head = head.next
+                pre.next = right
+                right = right.next
 
-        if l1 != None:
-            head.next = l1
-        else:
-            head.next = l2
+            pre = pre.next
 
-        return dummy.next
+        if left:
+            pre.next = left
+
+        if right:
+            pre.next = right
+
+        return [dummy.next]
+
+    def mergeSort(self, lists):
+        if len(lists) < 2:
+            return lists
 
 
-    def mergeHelper(self, lists, start, end):
-        if start == end:
-            return lists[start]
 
-        mid = int( ( start + end ) / 2)
-        left = self.mergeHelper(lists, start, mid)
-        right = self.mergeHelper(lists, mid + 1, end)
-        return self.mergeTwoLists(left, right)
+        mid = len(lists) // 2
+
+        left = lists[0:mid]
+        right = lists[mid:]
+
+        return self.merge(self.mergeSort(left), self.mergeSort(right))
 
 
     def mergeKLists(self, lists):
@@ -48,13 +52,11 @@ class Solution(object):
         :type lists: List[ListNode]
         :rtype: ListNode
         """
-
-        if len(lists) == 0:
+        if not lists:
             return None
-        result = self.mergeHelper(lists, 0, len(lists)-1)
 
-        return result
-
+        res = self.mergeSort(lists)
+        return res[0]
 
 if __name__ == '__main__':
     ListNode1 = ListNode(1)
