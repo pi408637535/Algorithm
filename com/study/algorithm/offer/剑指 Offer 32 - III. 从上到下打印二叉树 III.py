@@ -3,65 +3,65 @@
 # @Author  : piguanghua
 # @FileName: 剑指 Offer 32 - III. 从上到下打印二叉树 III.py
 # @Software: PyCharm
-
-
-class TreeNode:
+class TreeNode(object):
     def __init__(self, x):
         self.val = x
         self.left = None
         self.right = None
 
 import collections
+
 class Solution(object):
-
-    def __init__(self):
-        self.queue = []
-
     def levelOrder(self, root):
         """
         :type root: TreeNode
-        :rtype: List[int]
+        :rtype: List[List[int]]
         """
-        if not root:
-            return []
+        queue = collections.deque()
 
-        data_order = collections.deque()
-        data_order.append(root)
-        data_val = []
-        i = 0
+        if root:
+            queue.append(root)
 
-        while data_order:
+        res = []
+        i = 1
+        while queue:
 
+            nodos = []
+
+            while queue:
+                nodos.append(queue.popleft())
 
             tmp = []
 
-            i = int((i + 1) % 2)
+            for ele in nodos:
 
-            for _ in range(len(data_order)):
+                if ele.left:
+                    queue.append(ele.left)
 
-                node = data_order.popleft()
-                tmp.append(node.val)
+                if ele.right:
+                    queue.append(ele.right)
 
-                if i == 1:
-                    if node.right:
-                        data_order.append(node.right)
-                    if node.left:
-                        data_order.append(node.left)
-                else:
+                tmp.append(ele.val)
 
-                    if node.left:
-                        data_order.append(node.left)
-
-                    if node.right:
-                        data_order.append(node.right)
-
-            data_val.append(tmp)
-
-
-        return data_val
-
+            if i % 2 != 0:
+                res.append(tmp)
+            else:
+                res.append(tmp[::-1])
+            i += 1
+        return res
 
 if __name__ == '__main__':
+    # TreeNode3 = TreeNode(3)
+    # TreeNode9 = TreeNode(9)
+    # TreeNode20 = TreeNode(20)
+    # TreeNode15 = TreeNode(15)
+    # TreeNode7 = TreeNode(7)
+    #
+    # TreeNode3.left = TreeNode9
+    # TreeNode3.right = TreeNode20
+    # TreeNode20.left = TreeNode15
+    # TreeNode20.right = TreeNode7
+
     TreeNode1 = TreeNode(1)
     TreeNode2 = TreeNode(2)
     TreeNode3 = TreeNode(3)
@@ -73,5 +73,5 @@ if __name__ == '__main__':
     TreeNode2.left = TreeNode4
     TreeNode3.right = TreeNode5
 
-    print( Solution().levelOrder(TreeNode1) )
 
+    print(Solution().levelOrder(TreeNode1))

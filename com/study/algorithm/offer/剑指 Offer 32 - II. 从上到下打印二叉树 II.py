@@ -43,6 +43,35 @@ class Solution(object):
 
         return data_val
 
+class Solution(object):
+    def levelOrder(self, root):
+        """
+        :type root: TreeNode
+        :rtype: List[List[int]]
+        """
+        queue = collections.deque()
+        res = []
+        if root:
+            queue.append(root)
+
+        while len(queue):
+            temp_res = []
+            while queue:
+                temp_res.append(queue.popleft())
+
+            temp = []
+            for ele in temp_res:
+                if ele.left:
+                    queue.append(ele.left)
+                if ele.right:
+                    queue.append(ele.right)
+                temp.append(ele.val)
+            res.append(temp)
+
+
+
+        return  res
+
 
 if __name__ == '__main__':
     pass
