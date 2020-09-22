@@ -10,37 +10,32 @@ class TreeNode(object):
         self.left = None
         self.right = None
 
+import copy
 class Solution(object):
-    def pathSum(self, root, sum_total):
+    def pathSum(self, root, sums):
         """
         :type root: TreeNode
         :type sum: int
         :rtype: List[List[int]]
         """
-        ans = []
-        def dfs(root, sum_total, cur):
-            if root != None:
-                if sum_total - root.val == 0:
-                    cur.append(root.val)
-                    ans.append(cur.copy())
-                    cur.pop()
-                    return
+        self.ans = []
 
-                if sum_total - root.val > 0:
-                    cur.append(root.val)
-                    sum_total -= root.val
+        def helper(root, num, res):
 
-                    dfs(root.left, sum_total, cur)
-                    dfs(root.right, sum_total, cur)
+            if not root:
+                return
 
-                    data = cur.pop()
-                    sum_total += data
+            res.append(root.val)
 
+            if num - root.val == 0 and not root.left and not root.right:
+                self.ans.append(copy.copy(res))
 
-        dfs(root, sum_total, [])
+            helper(root.left, num - root.val, res)
+            helper(root.right, num - root.val, res)
+            res.pop()
 
-        return ans
-
+        helper(root, sums, [])
+        return self.ans
 
 
 

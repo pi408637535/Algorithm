@@ -31,6 +31,32 @@ class Solution(object):
         return cur(0, len(postorder) - 1)
 
 
+class Solution(object):
+    def verifyPostorder(self, postorder):
+        """
+        :type postorder: List[int]
+        :rtype: bool
+        """
+        if len(postorder) == 1 or not postorder:
+            return True
+
+
+        split_line = 0
+        while postorder[split_line] < postorder[-1]:
+            split_line += 1
+        left_tree = postorder[:split_line]
+        right_tree = postorder[split_line:len(postorder)-1]
+
+        left_result = True
+        for ele in left_tree:
+            if ele > postorder[-1]: left_result = False
+        right_result = True
+        for ele in right_tree:
+            if ele < postorder[-1]: right_result = False
+
+        return self.verifyPostorder(left_tree) and self.verifyPostorder(right_tree) and left_result and right_result
+
+
 if __name__ == '__main__':
     postorder = [1,3,2,6,5]
     print( Solution().verifyPostorder(postorder) )
