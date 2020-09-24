@@ -1,45 +1,59 @@
-# -*- coding: utf-8 -*-
-# @Time    : 2020/8/11 14:47
-# @Author  : piguanghua
-# @FileName: 剑指 Offer 45. 把数组排成最小的数.py
-# @Software: PyCharm
 
-import  sys
-import copy
 class Solution(object):
     def minNumber(self, nums):
         """
         :type nums: List[int]
         :rtype: str
         """
-        ans = []
-        visit = [False] * len(nums)
+        if not nums:
+            return []
+        nums = self.merge_sort(nums)
+        res = ""
+        for ele in nums:
+            res += str(ele)
+        return res
 
-        def dfs(n, cur):
-            if len(cur) == n:
-                ans.append(copy.deepcopy(cur))
-                return
+    def merge_sort(self,nums):
+        if len(nums) < 2:
+            return nums
+        mid = len(nums) // 2
+        left = nums[:mid]
+        right = nums[mid:]
+        return self.merge(self.merge_sort(left), self.merge_sort(right))
 
-            for i in range(len(nums)):
-                if visit[i] == True: continue
-                cur.append(nums[i])
-                visit[i] = True
-                dfs(n, cur)
-                visit[i] = False
-                cur.pop()
 
-        dfs(len(nums), [])
-        min_nums = []
-        for ele in ans:
-            num = ""
-            for i in ele:
-                num += str(i)
-            min_nums.append(num)
+    def merge(self, left, right):
+        res = []
+        while left and right:
+            if self.verse(left[0], right[0]):
+                res.append(left.pop(0))
+            else:
+                res.append(right.pop(0))
+        if left:
+            res.extend(left)
+        if right:
+            res.extend(right)
+        return res
 
-        return str(min(min_nums))
+    def verse(self, a, b):
+        a = str(a)
+        b = str(b)
+
+        string1 = a + b
+        string2 = b + a
+
+        return True if string1 < string2 else False
+
+
+
+
+
 
 if __name__ == '__main__':
+    nums = [111,11,1]
     nums = [10,2]
     nums = [3, 30, 34, 5, 9]
-    nums = [999999998,999999997,999999999]
-    print( Solution().minNumber(nums) )
+
+    print(Solution().minNumber(nums))
+
+
