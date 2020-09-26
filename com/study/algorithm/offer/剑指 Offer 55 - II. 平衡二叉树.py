@@ -32,6 +32,43 @@ class Solution(object):
         """
         return self.helper( root ).is_balance
 
+#2020.9.26
+class ResultType():
+    def __init__(self, depth, is_balance):
+        self.depth = depth
+        self.is_balance = is_balance
+
+class Solution(object):
+
+
+    def helper(self, root):
+        if root == None:
+            return ResultType(1, True)
+
+        left_result = self.helper(root.left)
+        right_result = self.helper(root.right)
+
+        is_balance = True
+        if abs(left_result.depth - right_result.depth) > 1:
+            is_balance = False
+
+        if left_result.is_balance and right_result.is_balance and is_balance:
+            is_balance = True
+        else:
+            is_balance = False
+
+
+        return ResultType(max(left_result.depth, right_result.depth) + 1, is_balance)
+
+    def isBalanced(self, root):
+        """
+        :type root: TreeNode
+        :rtype: bool
+        """
+        res = self.helper(root)
+
+
+        return res.is_balance
 
 
 if __name__ == '__main__':
