@@ -20,6 +20,20 @@ class Solution(object):
 
         return root
 
+class Solution(object):
+    def invertTree(self, root):
+        """
+        :type root: TreeNode
+        :rtype: TreeNode
+        """
+        if not root:
+            return None
+        left = self.invertTree(root.left)
+        right = self.invertTree(root.right)
+
+        root.left, root.right = right, left
+
+        return root
 
 if __name__ == '__main__':
     TreeNode4 = TreeNode(4)

@@ -33,6 +33,31 @@ class Solution(object):
             return None
 
 
+class Solution(object):
+    def lowestCommonAncestor(self, root, p, q):
+        """
+        :type root: TreeNode
+        :type p: TreeNode
+        :type q: TreeNode
+        :rtype: TreeNode
+        """
+
+        if not root:
+            return None
+        if root == p or root == q:
+            return root
+
+        left_res = self.lowestCommonAncestor(root.left, p, q)
+        right_res = self.lowestCommonAncestor(root.right, p, q)
+
+        if not left_res and right_res:
+            return right_res
+        elif not right_res and left_res:
+            return left_res
+        elif left_res and right_res:
+            return root
+
+
 
 
 if __name__ == '__main__':

@@ -56,6 +56,34 @@ class Solution(object):
         return max(result.root2any, result.any2any)
 
 
+import sys
+class Solution(object):
+
+    def helper(self, root):
+        if not root:
+            return 0
+
+        left_res = self.helper(root.left)
+        right_res = self.helper(root.right)
+
+        self.max_num = max(root.val, root.val + left_res, root.val + right_res, root.val + right_res + left_res,self.max_num)
+
+        return max(root.val, root.val + left_res, root.val + right_res)
+
+    def maxPathSum(self, root):
+        """
+        :type root: TreeNode
+        :rtype: int
+        """
+        if not root:
+            return 0
+
+        self.max_num = -sys.maxsize
+
+        self.helper(root)
+
+        return self.max_num
+
 
 if __name__ == '__main__':
     TreeNode_10 = TreeNode(-10)

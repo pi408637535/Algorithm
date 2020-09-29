@@ -38,7 +38,37 @@ class Solution(object):
         return self.ans
 
 
+import copy
 
+
+class Solution(object):
+
+    def helper(self, root, ans, total_sum):
+
+        if not root:
+            return
+
+        ans.append(root.val)
+
+        if ans and sum(ans) == total_sum and not root.left and not root.right:
+            self.res.append(copy.copy(ans))
+            # return
+
+        self.helper(root.left, ans, total_sum)
+        self.helper(root.right, ans, total_sum)
+        ans.pop()
+
+    def pathSum(self, root, sum):
+        """
+        :type root: TreeNode
+        :type sum: ints
+        :rtype: List[List[int]]
+        """
+        if not root:
+            return []
+        self.res = []
+        self.helper(root, [], sum)
+        return self.res
 
 
 if __name__ == '__main__':
