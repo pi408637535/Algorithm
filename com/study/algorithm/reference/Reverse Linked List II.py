@@ -138,6 +138,43 @@ class Solution(object):
 
         return dummy.next
 
+#2020.9.29
+class Solution(object):
+    def reverseBetween(self, head, m, n):
+        """
+        :type head: ListNode
+        :type m: int
+        :type n: int
+        :rtype: ListNode
+        """
+        i = 0
+        dummy = ListNode(0)
+        dummy.next = head
+        pre = dummy
+
+        while i < m-1:
+            pre = pre.next
+            i += 1
+        m_pre_node = pre
+        m_node = pre.next
+        n_node = m_node
+
+        while i < n -1 and n_node:
+            temp = n_node.next
+            n_node.next = m_pre_node.next
+            m_pre_node.next = n_node
+            n_node = temp
+            i += 1
+
+        temp = n_node.next
+        m_pre_node.next,n_node.next = n_node,m_pre_node.next
+        m_node.next = temp
+
+        return dummy.next
+
+        #反转m->n
+        #m,n后面互换
+
 
 if __name__ == '__main__':
     ListNode1 = ListNode(1)

@@ -21,6 +21,24 @@ class Solution(object):
 
         return dummy.next
 
+class Solution(object):
+    def reverseList(self, head):
+        """
+        :type head: ListNode
+        :rtype: ListNode
+        """
+        dummy = ListNode(0)
+        #dummy.next = None
+
+        pre = dummy
+
+        while head:
+            temp = head.next
+            head.next = pre.next
+            pre.next = head
+            head = temp
+
+        return dummy.next
 
 if __name__ == '__main__':
     ListNode1 = ListNode(1)
