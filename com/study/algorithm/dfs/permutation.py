@@ -13,11 +13,14 @@ def dfs(n, cur):
     if len(cur) == n:
         ans.append(cur.copy())
         return
-    for i in range(0, len(nums)):
+    for i in range(len(nums)):
         if used[i]: continue
+
         used[i] = True
         cur.append(nums[i])
+
         dfs(n, cur)
+
         cur.pop()
         used[i] = False
 
