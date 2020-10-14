@@ -34,6 +34,40 @@ class Solution(object):
             fast += 1
         return True
 
+class TreeNode(object):
+    def __init__(self, x):
+        self.val = x
+        self.left = None
+        self.right = None
+
+class Solution(object):
+    def isValidBST(self, root):
+        """
+        :type root: TreeNode
+        :rtype: bool
+        """
+        if not root:
+            return True
+        stack = []
+        pre = None
+        while stack or root:
+
+            while root:
+                stack.append(root)
+                root = root.left
+
+            temp = stack.pop()
+
+            if not pre:
+                pre = temp
+            else:
+                if pre.val >= temp.val:
+                    return False
+                pre = temp
+
+            root = temp.right
+
+        return True
 
 if __name__ == '__main__':
     '''
