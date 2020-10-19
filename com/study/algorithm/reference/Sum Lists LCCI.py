@@ -48,6 +48,62 @@ class Solution(object):
 
         return dummy.next
 
+class Solution(object):
+    def addTwoNumbers(self, l1, l2):
+        """
+        :type l1: ListNode
+        :type l2: ListNode
+        :rtype: ListNode
+        """
+        if not l1 and not l2:
+            return ListNode(0)
+
+        if not l1:
+            return l2
+        if not l2:
+            return l1
+
+        dummy = ListNode(0)
+        pre = dummy
+
+        over_bit = 0
+        while l1 and l2:
+            if l1.val + l2.val + over_bit  >= 10:
+                flag = 1
+            else:
+                flag = 0
+
+            val = l1.val + l2.val + over_bit - 10 * flag
+            node = ListNode(val)
+            pre.next = node
+            pre = pre.next
+
+            l1 = l1.next
+            l2 = l2.next
+            over_bit = flag
+
+        pre.next = l1 or l2
+
+        if pre.val == 10:
+            flag = 1
+
+        while flag and pre.next:
+            if pre.next.val >= 9:
+                flag = 1
+            else:
+                pre.next.val = pre.next.val + 1
+                flag = 0
+            pre.next.val = pre.next.val + flag - 10 * flag
+            pre = pre.next
+
+        if flag:
+
+            if pre.val == 10:
+                pre.val = 0
+
+            pre.next = ListNode(1)
+
+        return dummy.next
 
 if __name__ == '__main__':
     '''

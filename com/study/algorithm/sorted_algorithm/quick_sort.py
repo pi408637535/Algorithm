@@ -10,6 +10,7 @@ def partition(nums, left, right):
     pivot = left
     index = pivot + 1
     i = index
+    #这里是<=,而不是<，是因为 right是实际数组索引
     while i <= right:
         if nums[i] < nums[pivot]:
             swab(nums, i, index)
