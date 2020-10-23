@@ -35,16 +35,48 @@ class Solution(object):
                     else:
                         end = mid
 
-        if start + 1 ==  end:
-            if nums[start] == target:
-                return start
-            elif nums[end] == target:
-                return end
-        else: #start == end
-            if nums[end] == target:
-                return  end
+        if nums[start] == target:
+            return start
+        elif nums[end] == target:
+            return end
+        else:
+            return -1
 
-        return -1
+# 10.23
+class Solution(object):
+    def search(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: int
+        """
+        left = 0
+        right = len(nums) - 1
+
+        while left + 1 < right:
+            mid = left + (right - left) // 2
+            if nums[left] <= nums[mid]: #normal
+                if nums[left] <= target and target <= nums[mid]:
+                    right = mid
+                else:
+                    left = mid
+            else:
+                if nums[mid] <= target and target <= nums[right]:
+                    left = mid
+                else:
+                    right = mid
+
+        if nums[left] == target:
+            return left
+        elif nums[right] == target:
+            return right
+        else:
+            return -1
+
+if __name__ == '__main__':
+    print(Solution().search([5, 1, 3, 0], 0))
+
+
 
 if __name__ == '__main__':
     print( Solution().search([5,1,3], 3) )

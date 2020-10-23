@@ -20,6 +20,35 @@ class Solution(object):
 
         return max([ left_depth, right_depth ]) + 1
 
+class Solution(object):
+
+    def helper(self, root, k):
+        stack = []
+
+        while root or stack:
+
+            while root:
+                stack.append(root)
+                root = root.left
+
+            k -= 1
+            temp = stack.pop()
+            if not k:
+                return temp.val
+            root = temp.right
+
+
+    def kthSmallest(self, root, k):
+        """
+        :type root: TreeNode
+        :type k: int
+        :rtype: int
+        """
+        if not root:
+            return None
+
+        return self.helper(root, k)
+
 
 if __name__ == '__main__':
     node3 = TreeNode(3)
