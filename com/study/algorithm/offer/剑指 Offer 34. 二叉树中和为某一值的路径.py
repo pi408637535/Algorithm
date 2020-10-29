@@ -70,6 +70,39 @@ class Solution(object):
         self.helper(root, [], sum)
         return self.res
 
+# 2020.10.28
+import copy
+class Solution(object):
+
+    def helper(self, root, sum, cur):
+        if not root:
+            return
+
+        cur.append(root.val)
+        if not root.left and not root.right and root.val == sum:
+            # cur.append(root.val)
+            self.res.append(copy.copy(cur))
+            # return
+        res = sum - root.val
+
+
+        self.helper(root.left, res, cur)
+        self.helper(root.right, res, cur)
+        cur.pop()
+
+    def pathSum(self, root, sum):
+        """
+        :type root: TreeNode
+        :type sum: int
+        :rtype: List[List[int]]
+        """
+
+        if not root:
+            return []
+        self.res = []
+        self.helper(root, sum, [])
+        return self.res
+
 
 if __name__ == '__main__':
     TreeNode5_1 = TreeNode(5)
