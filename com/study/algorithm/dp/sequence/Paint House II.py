@@ -76,6 +76,50 @@ class Solution:
         return min(f[-1])
 
 
+# 2020.10.31
+import sys
+class Solution:
+    """
+    @param costs: n x k cost matrix
+    @return: an integer, the minimum cost to paint all houses
+    """
+    def minCostII(self, costs):
+        # write your code here
+        length = len(costs)
+        if not length:
+            return 0
+        k = len(costs[0])
+
+        f = [[0 for j in range(k)]  for i in range(length + 1)]
+        id1, id2 = 0,0
+
+        for i in range(k):
+            f[0][i] = 0
+
+        for i in range(1, length+1):
+            min1,min2 = sys.maxsize,sys.maxsize
+            for j in range(k):
+                if f[i - 1][j] < min1:
+                    min2 = min1
+                    id2 = id1
+                    min1 = f[i - 1][j]
+                    id1 = j
+                elif f[i-1][j] < min2:
+                    min2 = f[i-1][j]
+                    id2 = j
+
+            for j in range(k):
+                f[i][j] = costs[i-1][j]
+                if j != id1:
+                    f[i][j] += min1
+                else:
+                    f[i][j] += min2
+
+
+
+        return min(f[-1])
+
+
 
 
 if __name__ == '__main__':
