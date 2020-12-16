@@ -31,9 +31,9 @@ class Solution(object):
         :rtype: int
         """
         string_n = str(N)
-        max_num = -1
-        index = -1
-        flag = False
+        max_num = -1 #最大当前最大的数，与index联用
+        index = -1 #标识位来解决 3332，这种带重复的数字，记录首个最大值
+        flag = False #判断是否是monotone increasing digits
         for i in range(len(string_n)):
             if int(string_n[i]) >= max_num:
                 if int(string_n[i]) > max_num: index = i
