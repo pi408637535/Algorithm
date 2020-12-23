@@ -14,7 +14,7 @@ class Solution:
         end = len(nums) - 1
 
         while start + 1 < end: # 邻近or相等跳出循环
-            #mid = int( ( start + end) / 2 )
+            #mid = int( ( start + end) / 2  )
             mid = start + (end - start) // 2
             if nums[mid] == target:
                 start = mid
