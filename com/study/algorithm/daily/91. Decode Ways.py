@@ -50,10 +50,43 @@ class Solution(object):
 
         return f[-1]
 
+
+class Solution(object):
+    def numDecodings(self, s):
+        """
+        转移方程：
+            对于一个digit满足1-9时，f[i] = f[i-1]
+            对于连续的两个字母满足10-24时， f[i] = f[i-1] + f[i-2]
+        :type s: str
+        :rtype: int
+        """
+        if not s:
+            return 0
+
+        f = [0] * (len(s) + 1)
+
+        f[0] = 1 #创建这个初始条件，主要是因为方便转移方程
+        for i in range(1, len(s) + 1):
+            temp = ord(s[i-1]) - ord('0')
+            if temp > 0 and temp < 10:
+                f[i] = f[i-1]
+            if i > 1:
+                temp = 10 * ( ord(s[i-2]) - ord('0') ) + ( ord(s[i-1]) - ord('0') )
+                if 10 <= temp and temp <= 26:
+                    f[i] += f[i - 2]
+
+        return f[-1]
+
+
+
+
 if __name__ == '__main__':
-    s = "12"
-    s = "226"
+    # s = "12"
+    # s = "226"
     # s = "0"
+    # s = "012"
     # s = "1"
-    # s = "10"
+    s = "10"
+
+
     print(Solution().numDecodings(s))
