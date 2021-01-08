@@ -66,15 +66,179 @@ class Solution(object):
 
         return uf.count
 
+#DFS
+class Solution(object):
+    def numIslands(self, grid):
+        """
+        :type grid: List[List[str]]
+        :rtype: int
+        """
+        if not grid or not grid[0]:
+            return 0
+
+        self.m, self.n = len(grid), len(grid[0])
+        self.grid = grid
+
+        self.visited = set()
+
+        return sum( [ self.floodFillDfs(i,j)  for i in range(self.m) for j in range(self.n)] )
+
+    def floodFillDfs(self, x, y):
+        if not self._isValid(x, y):
+            return 0
+        self.visited.add((x,y))
+        for d in [(1,0), (0,1), (-1,0), (0, -1)]:
+            self.floodFillDfs(x + d[0], y + d[1])
+        return 1
+
+    def _isValid(self, x, y):
+        if x < 0 or x >= self.m or y < 0 or y >= self.n:
+            return False
+
+        if self.grid[x][y] == '0' or (x,y) in self.visited:
+            return False
+        return True
+
+#BFS
+import collections
+class Solution(object):
+    def numIslands(self, grid):
+        """
+        :type grid: List[List[str]]
+        :rtype: int
+        """
+        if not grid or not grid[0]:
+            return 0
+
+        self.m, self.n = len(grid), len(grid[0])
+        self.grid = grid
+
+        self.visited = set()
+
+        return sum( [ self.floodFill_BFS(i,j)  for i in range(self.m) for j in range(self.n)] )
+
+    def floodFill_BFS(self, x, y):
+        if not self._isValid(x, y):
+            return 0
+
+        self.visited.add((x,y))
+        queue = collections.deque()
+        queue.append((x,y))
+
+        while queue:
+            cur_x, cur_y = queue.popleft()
+            for d in [(1,0), (0,1), (-1,0), (0, -1)]:
+                new_x, new_y = cur_x + d[0], cur_y + d[1]
+                if self._isValid(new_x, new_y):
+                    self.visited.add((new_x, new_y))
+                    queue.append((new_x, new_y))
+        return 1
+
+    def _isValid(self, x, y):
+        if x < 0 or x >= self.m or y < 0 or y >= self.n:
+            return False
+
+        if self.grid[x][y] == '0' or (x,y) in self.visited:
+            return False
+        return True
+
+#2021.1.8
+import collections
+class Solution(object):
+    def numIslands(self, grid):
+        """
+        :type grid: List[List[str]]
+        :rtype: int
+        """
+        if not len(grid) or not len(grid[0]):
+            return 0
+
+        self.m, self.n = len(grid),len(grid[0])
+        self.visited = set()
+        self.grid = grid
+        self.queue = collections.deque()
+
+
+        res = []
+        for i in range(self.m):
+            for j in range(self.n):
+                res.append(self._bfs(i,j))
+        return sum(res)
+
+    def _dfs(self, i, j):
+        if self._isValid(i,j):
+            self.visited.add( (i,j) )
+            for d in [(1, 0), (0, 1), (-1, 0), (0, -1)]:
+                self._dfs(i + d[0], j + d[1])
+            return 1
+        else:
+            return 0
+
+    def _bfs(self, i, j):
+        if self._isValid(i,j):
+            self.visited.add( (i,j) )
+            self.queue.append( (i,j) )
+
+            while self.queue:
+                cur_x, cur_y = self.queue.popleft()
+                for d in [(1, 0), (0, 1), (-1, 0), (0, -1)]:
+                    new_x, new_y = cur_x + d[0], cur_y + d[1]
+                    if self._isValid(new_x, new_y):
+                        self.visited.add((new_x, new_y))
+                        self.queue.append((new_x, new_y))
+            return 1
+        else:
+            return 0
+
+    def _isValid(self, i, j):
+
+        # if 0 <= i < self.m and 0 <= j < self.n:
+        #     if (i,j) not in self.visited and self.grid[i][j] == "1":
+        #         return True
+        #     else:
+        #         return False
+        # else:
+        #     return False
+        if not(0 <= i < self.m and 0 <= j < self.n):
+            return False
+        if (i,j) in self.visited or self.grid[i][j] != "1":
+            return False
+
+        return True
+
+
+
+
+
 if __name__ == '__main__':
-    # isConnected = [[1, 1, 0], [1, 1, 0], [0, 0, 1]]
-    # isConnected = [[1, 0, 0], [0, 1, 0], [0, 0, 1]]
-    # print(Solution().findCircleNum(isConnected))
+    # grid = [
+    #     ["1", "1", "1", "1", "0"],
+    #     ["1", "1", "0", "1", "0"],
+    #     ["1", "1", "0", "0", "0"],
+    #     ["0", "0", "0", "0", "0"]
+    # ]
+    grid = [
+        ["1", "1", "0", "0", "0"],
+        ["1", "1", "0", "0", "0"],
+        ["0", "0", "1", "0", "0"],
+        ["0", "0", "0", "1", "1"]
+    ]
+
+
+    print(Solution().numIslands(grid))
+
+
+if __name__ == '__main__':
+
     grid = [
         ["1", "1", "1", "1", "0"],
         ["1", "1", "0", "1", "0"],
         ["1", "1", "0", "0", "0"],
         ["0", "0", "0", "0", "0"]
     ]
+    grid = [["1","1","0","0","0"],
+            ["1","1","0","0","0"],
+            ["0","0","1","0","0"],
+            ["0","0","0","1","1"]]
 
     print(Solution().numIslands(grid))
