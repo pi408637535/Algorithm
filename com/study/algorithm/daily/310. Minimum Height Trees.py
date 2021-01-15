@@ -1,6 +1,5 @@
 import collections
 
-
 class Solution(object):
     def findMinHeightTrees(self, n, edges):
         """
@@ -8,8 +7,11 @@ class Solution(object):
         :type edges: List[List[int]]
         :rtype: List[int]
         """
-        degree = [0] * n  # 入度
-        graph = collections.defaultdict(list)
+        if not edges:
+            return [0]
+
+        degree = [0] * n  # 入度存储表
+        graph = collections.defaultdict(list) #构建图
 
         for ele in edges:
             graph[ele[0]].append(ele[1])
@@ -19,17 +21,22 @@ class Solution(object):
 
         queue = collections.deque([i for i in range(n) if degree[i] == 1])
         visited = set()
-        node = None
+        # node = None
         while queue:
-            node = queue.popleft()
-            if node not in visited:
-                visited.add(node)
-                for neighbor in graph[node]:
-                    degree[neighbor] -= 1
+            res = []
+            #一次性弹出入度相同的节点
+            size = len(queue) #消减位于同一层的节点
+            for i in range(size):
+                node = queue.popleft()
+                if node not in visited:
+                    visited.add(node)
+                    res.append(node)
+                    for neighbor in graph[node]:
+                        degree[neighbor] -= 1
 
-                    if degree[neighbor] == 1:
-                        queue.append(neighbor)
-        return node
+                        if degree[neighbor] == 1:
+                            queue.append(neighbor)
+        return res
 
 
 if __name__ == '__main__':
